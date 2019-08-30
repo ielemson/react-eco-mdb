@@ -5,9 +5,11 @@ class HomePage extends React.Component {
     scrollToTop = () => window.scrollTo(0, 0);
     render() {
         return (
-            <MDBContainer>
-                <ProductCard />
-            </MDBContainer>
+            <React.Fragment>
+                <MDBContainer>
+                    <ProductCard />
+                </MDBContainer>
+            </React.Fragment>
         );
     }
 }

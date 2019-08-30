@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import ProductRow from './product-item';
 import ProductData from './product-data';
 import { MDBRow } from "mdbreact";
+// import SectionContainer from './../sectionContainer';
 class Product extends Component {
     constructor() {
         super();
@@ -11,17 +12,17 @@ class Product extends Component {
 
     render() {
         return (
+            <React.Fragment>
 
-            <MDBRow className="mt-4">
+                <MDBRow>
 
-                {this.state.products.map(({ id, ...otherProductProps }) => (
+                    {this.state.products.map(({ id, ...otherProductProps }) => (
 
-                    <ProductRow key={id} {...otherProductProps} />
-                ))}
-            </MDBRow>
+                        <ProductRow key={id} {...otherProductProps} />
+                    ))}
+                </MDBRow>
 
-
-
+            </React.Fragment>
         );
     }
 }
