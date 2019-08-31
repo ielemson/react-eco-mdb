@@ -13,7 +13,7 @@ import {
 
 
 } from "mdbreact";
-const Products = ({ title, imageUrl, price, size, linkUrl }) => {
+const Products = ({ title, imageUrl, price, linkUrl }) => {
     return (
         <React.Fragment>
             <MDBCol md="4" sm="8" className="mt-4">

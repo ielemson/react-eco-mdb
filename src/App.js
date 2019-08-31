@@ -1,7 +1,9 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import HomePage from "./page/home/HomePage";
-import ContactUs from "./page/contact-us/ContactUS"
+import ShopPage from './../src/page/shop/shoppge';
+import AuthPage from '../src/page/auth/authpage';
+import ContactUs from "./page/contact-us/ContactUS";
 import TopNavbar from './page/appbar/AppBar';
 import Carousel from './page/carousel/Carousel';
 import { MDBContainer } from "mdbreact";
@@ -14,8 +16,12 @@ class App extends Component {
           <MDBContainer>
             <TopNavbar />
             <Carousel />
-            <Route exact path="/" component={HomePage} />
-            <Route path="/contact" component={ContactUs} />
+            <Switch>
+              <Route exact path="/" component={HomePage} />
+              <Route path="/shop" component={ShopPage} />
+              <Route path="/login" component={AuthPage} />
+              <Route path="/contact" component={ContactUs} />
+            </Switch>
             <Footer />
           </MDBContainer>
         </div>

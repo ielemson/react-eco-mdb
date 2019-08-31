@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import {
-    MDBNavbar, MDBNavbarBrand, MDBNavbarNav, MDBNavItem, MDBNavLink, MDBNavbarToggler, MDBCollapse, MDBDropdown,
-    MDBDropdownToggle, MDBDropdownMenu, MDBDropdownItem, MDBIcon
+    MDBNavbar, MDBNavbarBrand, MDBNavbarNav, MDBNavItem, MDBNavLink, MDBNavbarToggler, MDBCollapse, MDBIcon
 } from "mdbreact";
 class NavbarPage extends Component {
     state = {
@@ -25,10 +24,10 @@ class NavbarPage extends Component {
                     <MDBNavbarToggler onClick={this.toggleCollapse} />
                     <MDBCollapse id="navbarCollapse3" isOpen={this.state.isOpen} navbar>
                         <MDBNavbarNav left>
-                            <MDBNavItem active>
+                            <MDBNavItem >
                                 <MDBNavLink to="/">Home</MDBNavLink>
                             </MDBNavItem>
-                            <MDBNavItem>
+                            {/* <MDBNavItem>
                                 <MDBDropdown>
                                     <MDBDropdownToggle nav caret>
                                         <div className="d-none d-md-inline">Category</div>
@@ -37,9 +36,15 @@ class NavbarPage extends Component {
                                         <MDBDropdownItem href="#!">Action</MDBDropdownItem>
                                     </MDBDropdownMenu>
                                 </MDBDropdown>
+                            </MDBNavItem> */}
+                            <MDBNavItem>
+                                <MDBNavLink to="/shop">Shop</MDBNavLink>
                             </MDBNavItem>
                             <MDBNavItem>
-                                <MDBNavLink to="#!">Shop</MDBNavLink>
+
+                                <MDBNavLink to="/login">Login</MDBNavLink>
+
+
                             </MDBNavItem>
                             <MDBNavItem>
 
@@ -59,10 +64,7 @@ class NavbarPage extends Component {
                                     <MDBIcon fab icon="google-plus-g" />
                                 </MDBNavLink>
                             </MDBNavItem>
-                            <MDBNavItem> <MDBNavLink to="#!">
-                                <MDBIcon icon="user" />&nbsp;
-                                Login
-</MDBNavLink></MDBNavItem>
+
                             {/* <MDBNavItem>
 <MDBDropdown>
 <MDBDropdownToggle nav caret>
