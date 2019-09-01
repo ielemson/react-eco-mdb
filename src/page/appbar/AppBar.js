@@ -1,89 +1,81 @@
-import React, { Component } from "react";
+import React from "react";
+import { auth } from "../../firebaseDB/firebase.util";
 import {
-    MDBNavbar, MDBNavbarBrand, MDBNavbarNav, MDBNavItem, MDBNavLink, MDBNavbarToggler, MDBCollapse, MDBIcon
+  MDBNavbar,
+  MDBNavbarBrand,
+  MDBNavbarNav,
+  MDBNavItem,
+  MDBNavLink,
+  MDBIcon
 } from "mdbreact";
-class NavbarPage extends Component {
-    state = {
-        isOpen: false
-    };
 
-    toggleCollapse = () => {
-        this.setState({ isOpen: !this.state.isOpen });
-    }
+const NavbarPage = ({ currentUser }) => {
+  // const { currUser } = this.props.currentUser;
+  return (
+    <React.Fragment>
+      <MDBNavbar color="unique-color-dark" dark expand="md">
+        <MDBNavbarBrand>
+          {/* <strong className="white-text">React-Commerce</strong> */}
+          <MDBNavbarBrand href="/">
+            <img
+              src="https://mdbootstrap.com/img/logo/mdb-transparent.png"
+              height="30"
+              alt=""
+            />
+          </MDBNavbarBrand>
+        </MDBNavbarBrand>
 
-    render() {
-        return (
-            <React.Fragment>
-                <MDBNavbar color="unique-color-dark" dark expand="md">
-                    <MDBNavbarBrand>
-                        {/* <strong className="white-text">React-Commerce</strong> */}
-                        <MDBNavbarBrand href="/">
-                            <img src="https://mdbootstrap.com/img/logo/mdb-transparent.png" height="30" alt="" />
-                        </MDBNavbarBrand>
-                    </MDBNavbarBrand>
-                    <MDBNavbarToggler onClick={this.toggleCollapse} />
-                    <MDBCollapse id="navbarCollapse3" isOpen={this.state.isOpen} navbar>
-                        <MDBNavbarNav left>
-                            <MDBNavItem >
-                                <MDBNavLink to="/">Home</MDBNavLink>
-                            </MDBNavItem>
-                            {/* <MDBNavItem>
-                                <MDBDropdown>
-                                    <MDBDropdownToggle nav caret>
-                                        <div className="d-none d-md-inline">Category</div>
-                                    </MDBDropdownToggle>
-                                    <MDBDropdownMenu className="dropdown-default">
-                                        <MDBDropdownItem href="#!">Action</MDBDropdownItem>
-                                    </MDBDropdownMenu>
-                                </MDBDropdown>
-                            </MDBNavItem> */}
-                            <MDBNavItem>
-                                <MDBNavLink to="/shop">Shop</MDBNavLink>
-                            </MDBNavItem>
-                            <MDBNavItem>
+        <MDBNavbarNav left>
+          <MDBNavItem>
+            <MDBNavLink to="/">Home</MDBNavLink>
+          </MDBNavItem>
 
-                                <MDBNavLink to="/login">Login</MDBNavLink>
+          <MDBNavItem>
+            <MDBNavLink to="/shop">Shop</MDBNavLink>
+          </MDBNavItem>
 
-
-                            </MDBNavItem>
-                            <MDBNavItem>
-
-                                <MDBNavLink to="/contact">Contact Us</MDBNavLink>
-
-
-                            </MDBNavItem>
-                        </MDBNavbarNav>
-                        <MDBNavbarNav right>
-                            <MDBNavItem>
-                                <MDBNavLink className="waves-effect waves-light" to="#!">
-                                    <MDBIcon fab icon="twitter" />
-                                </MDBNavLink>
-                            </MDBNavItem>
-                            <MDBNavItem>
-                                <MDBNavLink className="waves-effect waves-light" to="#!">
-                                    <MDBIcon fab icon="google-plus-g" />
-                                </MDBNavLink>
-                            </MDBNavItem>
-
-                            {/* <MDBNavItem>
-<MDBDropdown>
-<MDBDropdownToggle nav caret>
-<MDBIcon icon="user" />
-</MDBDropdownToggle>
-<MDBDropdownMenu className="dropdown-default">
-<MDBDropdownItem href="#!">Action</MDBDropdownItem>
-<MDBDropdownItem href="#!">Another Action</MDBDropdownItem>
-<MDBDropdownItem href="#!">Something else here</MDBDropdownItem>
-<MDBDropdownItem href="#!">Something else here</MDBDropdownItem>
-</MDBDropdownMenu>
-</MDBDropdown>
-</MDBNavItem> */}
-                        </MDBNavbarNav>
-                    </MDBCollapse>
-                </MDBNavbar>
-            </React.Fragment>
-        );
-    }
-}
+          <MDBNavItem>
+            <MDBNavLink to="/contact">Contact Us</MDBNavLink>
+          </MDBNavItem>
+          <MDBNavItem>
+            {currentUser ? (
+              <MDBNavLink
+                to="#!logout"
+                onClick={() => auth.signOut()}
+                size="1x"
+                className="amber-text pr-3"
+              >
+                Logout <MDBIcon fas="true" icon="sign-out-alt" />
+              </MDBNavLink>
+            ) : (
+              <MDBNavLink to="/login">
+                Login{" "}
+                <MDBIcon
+                  fas="true"
+                  icon="sign-in-alt"
+                  size="1x"
+                  className="green-text pr-3"
+                  gradient="purple"
+                />
+              </MDBNavLink>
+            )}
+          </MDBNavItem>
+        </MDBNavbarNav>
+        <MDBNavbarNav right>
+          <MDBNavItem>
+            <MDBNavLink className="waves-effect waves-light" to="#!">
+              <MDBIcon fab icon="twitter" />
+            </MDBNavLink>
+          </MDBNavItem>
+          <MDBNavItem>
+            <MDBNavLink className="waves-effect waves-light" to="#!">
+              <MDBIcon fab icon="google-plus-g" />
+            </MDBNavLink>
+          </MDBNavItem>
+        </MDBNavbarNav>
+      </MDBNavbar>
+    </React.Fragment>
+  );
+};
 
 export default NavbarPage;
