@@ -9,7 +9,7 @@ import {
   MDBModalFooter
 } from "mdbreact";
 import SmartBtn from "../custom-btn/custom-btn";
-import { LoginWithGoogle } from "../../firebaseDB/firebase.util";
+import { auth, LoginWithGoogle } from "../../firebaseDB/firebase.util";
 
 class SignIn extends Component {
   constructor(props) {
@@ -20,8 +20,15 @@ class SignIn extends Component {
     };
   }
 
-  handleSubmit = event => {
+  handleSubmit = async event => {
     event.preventDefault();
+    const { email, password } = this.state;
+
+    try {
+      await auth.signInWithEmailAndPassword(email, password);
+    } catch (error) {
+      console.warn(error.message);
+    }
     this.setState({ email: "", password: "" });
   };
 
