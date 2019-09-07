@@ -1,5 +1,7 @@
 import React from "react";
 import { auth } from "../../firebaseDB/firebase.util";
+//HOC component to help us modify other component to have access to things related to redux
+import { connect } from "react-redux";
 import {
   MDBNavbar,
   MDBNavbarBrand,
@@ -77,5 +79,7 @@ const NavbarPage = ({ currentUser }) => {
     </React.Fragment>
   );
 };
-
-export default NavbarPage;
+const mapStateToProps = state => ({
+  currentUser: state.user.currentUser
+});
+export default connect(mapStateToProps)(NavbarPage);

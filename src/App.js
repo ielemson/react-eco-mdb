@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { connect } from "react-redux";
+import { setCurrentUser } from "./redux/user/user.actions";
 import HomePage from "./page/home/HomePage";
 import ShopPage from "./../src/page/shop/shoppge";
 import AuthPage from "../src/page/auth/authpage";
@@ -10,19 +12,15 @@ import { MDBContainer } from "mdbreact";
 import Footer from "./page/footer/Footer";
 import { auth, creatUserProfileDocument } from "./firebaseDB/firebase.util";
 class App extends Component {
-  constructor() {
-    super();
-    this.state = { currentUSer: null };
-  }
   unsubscribeFromAuth = null;
-
   componentDidMount() {
+    const { setCurrentUser } = this.props;
     this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
       if (userAuth) {
         const userRef = await creatUserProfileDocument(userAuth);
         userRef.onSnapshot(snapShot => {
           // console.log(snapShot.data());
-          this.setState(
+          setCurrentUser(
             {
               currentUSer: {
                 id: snapShot.id,
@@ -33,7 +31,7 @@ class App extends Component {
           );
         });
       } else {
-        this.setState({ currentUSer: userAuth });
+        setCurrentUser(userAuth);
       }
     });
   }
@@ -46,7 +44,7 @@ class App extends Component {
       <Router>
         <React.Fragment>
           <MDBContainer>
-            <TopNavbar currentUser={this.state.currentUSer} />
+            <TopNavbar />
             <Carousel />
             <Switch>
               <Route exact path="/" component={HomePage} />
@@ -62,4 +60,10 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapDispatchToProps = dispatch => ({
+  setCurrentUser: user => dispatch(setCurrentUser(user))
+});
+export default connect(
+  null,
+  mapDispatchToProps
+)(App);
